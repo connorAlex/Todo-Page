@@ -1,12 +1,45 @@
 body {
     margin: 0;
     padding: 0;
+    
 }
 
 header {
     display: flex;
-    
+
+    font-size: 36px;
+    padding: 5px;
+
     border: 1px solid;
     border-color: black;
+    
+}
 
+main{
+    display: grid;
+    grid-template-columns:1fr 3fr;
+    
+    height: 100vh;
+    border: 1px solid;
+    border-color: black;
+}
+
+.projects {
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid;
+    border-color: black;
+    gap: 15px;
+}
+
+.projects :first-child{
+    font-size: 24px;
+    margin-top: 5px;
+
+}
+
+.taskCard {
+    display:flex;
+    padding: 15px;
 }
