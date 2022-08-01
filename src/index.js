@@ -1,8 +1,12 @@
 import './style.css';
-import { createProject } from './js/project';
-import { createTask } from './js/task';
+import { Project } from './js/project';
+import { Task } from './js/task';
 
+const testTask = Task('test_task');
+const testProject = Project('test_project');
 
+testProject.addTask(testTask);
+testProject.displayTasks();
 // displayController
 const displayController = (() => {
 

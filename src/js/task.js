@@ -1,5 +1,5 @@
 // tasks
-const createTask = (name, desc, priority, dueDate) => {
+const Task = (name, desc, priority, dueDate) => {
     
     const getName = () => name;
     const getDesc = () => desc;
@@ -9,4 +9,4 @@ const createTask = (name, desc, priority, dueDate) => {
     return {getName, getDesc, getPriority, getDueDate};
 };
 
-export {createTask};
+export {Task};
