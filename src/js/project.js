@@ -1,6 +1,5 @@
 const Project = (name) => {
 
-    //init array
     let projectArray = [];
 
     const getTasks = () => {
@@ -16,7 +15,30 @@ const Project = (name) => {
         projectArray.splice(index, 1);
     }
 
-    return {addTask, getTasks, removeTask};
+    const getName = () => name;
+
+    return {addTask, getTasks, removeTask, getName};
 }
 
-export {Project};
+const projectHandler = (() => {
+    let projectList = [];
+
+    const addProject = (project) => {
+        projectList.push(project);
+    };
+
+    const removeProject = (project) => {
+        const index = projectList.indexOf(project);
+        projectList.splice(index, 1);
+    };
+
+    const logProjects = () => {
+        console.log("logProjects started");
+        projectList.forEach((e)=> console.log(e.getName()))
+    }; 
+
+
+    return {addProject, removeProject, logProjects};
+})();
+
+export {Project, projectHandler};
