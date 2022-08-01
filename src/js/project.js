@@ -3,7 +3,7 @@ const Project = (name) => {
     //init array
     let projectArray = [];
 
-    const displayTasks = () => {
+    const getTasks = () => {
         projectArray.forEach((e) => console.log(e.getName()));
     }
 
@@ -11,7 +11,12 @@ const Project = (name) => {
         projectArray.push(task);
     }
 
-    return {addTask, displayTasks};
+    const removeTask = (task) => {
+        const index = projectArray.indexOf(task);
+        projectArray.splice(index, 1);
+    }
+
+    return {addTask, getTasks, removeTask};
 }
 
 export {Project};
