@@ -33,12 +33,17 @@ main{
     gap: 15px;
 }
 
-.projects :first-child{
+.projects div:first-child{
     font-size: 24px;
     margin-top: 5px;
 
 }
+.projectContainer {
+    display:flex;
+    flex-direction: column-reverse;
+    gap: 10px;
 
+}
 .taskCard {
     display:flex;
     padding: 15px;
