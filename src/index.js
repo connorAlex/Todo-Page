@@ -2,36 +2,34 @@ import './style.css';
 import { Project, projectHandler } from './js/project';
 import { Task } from './js/task';
 
+
 const testTask = Task('test_task');
 const testProject = Project('test_project');
-
-testProject.addTask(testTask);
-testProject.getTasks();
-
-const newproject = Project('myProject');
-projectHandler.addProject(newproject);
-
-const newproject2 = Project('myProject2');
-projectHandler.addProject(newproject2);
-
-projectHandler.logProjects();
-
-projectHandler.removeProject(newproject);
-projectHandler.logProjects();
 
 // displayController
 const displayController = (() => {
     const updateProjects = () => {
-        console.log("update projects");
+
+        // loop through all projects in the project handler array and display on DOM
+        const projects = projectHandler.getProjects();
+        const projectContainer = document.querySelector('.projectContainer');
+        projectContainer.innerHTML = "";
+        projects.forEach((e)=> {
+            let btn = document.createElement('button');
+            btn.innerHTML = e.getName();
+            projectContainer.appendChild(btn);
+        });
     };
 
-    const updateTasks = () => {
+    const updateTasks = (project) => {
+        // loop through the selected project and display all tasks
         console.log("update Tasks");
     };
 
     return { updateProjects, updateTasks};
 })();
 
+displayController.updateProjects();
 // Event Handler
 const eventHandler = ((event) => {
 
