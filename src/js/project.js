@@ -1,6 +1,11 @@
+
+
 const Project = (name) => {
 
+    //contains all the tasks within a project
     let projectArray = [];
+
+    const getName = () => name;
 
     const getTasks = () => {
         projectArray.forEach((e) => console.log(e.getName()));
@@ -15,13 +20,18 @@ const Project = (name) => {
         projectArray.splice(index, 1);
     }
 
-    const getName = () => name;
-
     return {addTask, getTasks, removeTask, getName};
 }
 
 const projectHandler = (() => {
+    
+    //contains all projects
     let projectList = [];
+    
+    //add 1 default project
+    let defaultProject = Project("myProject");
+    projectList.push(defaultProject);
+
 
     const addProject = (project) => {
         projectList.push(project);
@@ -32,13 +42,11 @@ const projectHandler = (() => {
         projectList.splice(index, 1);
     };
 
-    const logProjects = () => {
-        console.log("logProjects started");
-        projectList.forEach((e)=> console.log(e.getName()))
+    const getProjects = () => {
+        return projectList;
     }; 
 
-
-    return {addProject, removeProject, logProjects};
+    return {addProject, removeProject, getProjects};
 })();
 
 export {Project, projectHandler};
