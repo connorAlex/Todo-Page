@@ -8,7 +8,7 @@ const Project = (name) => {
     const getName = () => name;
 
     const getTasks = () => {
-        projectArray.forEach((e) => console.log(e.getName()));
+        return projectArray;
     }
 
     const addTask = (task) => {
