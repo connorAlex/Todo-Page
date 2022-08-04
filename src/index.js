@@ -46,7 +46,7 @@ const displayController = (() => {
 
 
                 let card = document.createElement('div');
-                card.classList.add('card');
+                card.classList.add('taskCard');
     
                 let cardName = document.createElement('div');
                 cardName.innerHTML = e.getName();
@@ -59,15 +59,23 @@ const displayController = (() => {
         
     };
 
-    return {updateProjects, updateTasks};
+    const clearInputs = () => {
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach((e) => {
+            inputs.innerHTML = "";
+        });
+    };
+
+    return {updateProjects, updateTasks, clearInputs};
 })();
 
 
 // Event Handler
 const eventHandler = ((event) => {
 
-    // assign the currently selected project
     let currentProject = "";
+
+    const getCurrentProject = () => currentProject;
 
     const selectProject = (project) => {
         console.log("selectProject fired");
@@ -88,15 +96,13 @@ const eventHandler = ((event) => {
                 selectProject(e.name);
             });
         });
-    }
-
-    
+    };
 
 
     const addProjectBtn = document.querySelector(".addProjectBtn");
     addProjectBtn.addEventListener("click", function() {console.log("project click")});
     
-    return {addSelectListeners};
+    return {addSelectListeners, getCurrentProject};
 })();
 const testTask = Task('test_task');
 const testProject = Project('test_project');
