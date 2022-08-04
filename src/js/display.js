@@ -4,10 +4,10 @@ import { eventHandler } from "./event";
 const displayController = (() => {
   const updateProjects = () => {
     const projects = projectHandler.getProjects();
+
     const projectContainer = document.querySelector(".projectContainer");
     projectContainer.innerHTML = "";
 
-    //this can be extracted
     projects.forEach((e) => createButton(e));
 
     addSelectListeners();
@@ -28,20 +28,19 @@ const displayController = (() => {
     const taskContainer = document.querySelector(".taskContainer");
     taskContainer.innerHTML = "";
 
-    if (tasks) {
-      //this can be extracted
-      tasks.forEach((e) => {
-        let card = document.createElement("div");
-        card.classList.add("taskCard");
+    if (tasks) tasks.forEach((e) => createCard(e));
+  };
 
-        let cardName = document.createElement("div");
-        cardName.innerHTML = e.getName();
-        cardName.classList.add("title");
+  const createCard = (task) => {
+    let card,
+      cardName = document.createElement("div");
+    card.classList.add("taskCard");
 
-        card.appendChild(cardName);
-        taskContainer.appendChild(card);
-      });
-    }
+    cardName.classList.add("title");
+    cardName.innerHTML = task.getName();
+    card.appendChild(cardName);
+
+    taskContainer.appendChild(card);
   };
 
   const clearInputs = () => {
