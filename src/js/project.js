@@ -2,7 +2,6 @@
 
 const Project = (name) => {
 
-    //contains all the tasks within a project
     let projectArray = [];
 
     const getName = () => name;
@@ -25,10 +24,8 @@ const Project = (name) => {
 
 const projectHandler = (() => {
     
-    //contains all projects
     let projectList = [];
     
-    //add 1 default project
     let defaultProject = Project("myProject");
     projectList.push(defaultProject);
 
@@ -46,14 +43,10 @@ const projectHandler = (() => {
         return projectList;
     };
 
-    const findProject = (name) => {
-        if (projectList.includes(name)) {
-            return projectList.indexOf(name);
-        } else {
-            return false;
-        }
-        
-        
+    const findProject = (projectName) => {
+
+        let obj = projectList.find(e => e.getName() === projectName);
+        return obj;
     }
 
     return {addProject, removeProject, getProjects, findProject};
