@@ -66,6 +66,24 @@ const displayController = (() => {
         });
     };
 
+    const addSelectListeners = () => {
+
+        console.log("addSelectListeners fired");
+
+        const selectProjectBtns = document.querySelectorAll(".selectProjectBtn");
+        selectProjectBtns.forEach((e) => {
+
+            e.addEventListener("click",function() {
+                console.log(e.name);
+                selectProject(e.name);
+            });
+        });
+    };
+
+
+    const addProjectBtn = document.querySelector(".addProjectBtn");
+    addProjectBtn.addEventListener("click", function() {console.log("project click")});
+
     return {updateProjects, updateTasks, clearInputs};
 })();
 
@@ -84,25 +102,9 @@ const eventHandler = ((event) => {
         displayController.updateTasks(projectObject);
     };
     
-    const addSelectListeners = () => {
-
-        console.log("addSelectListeners fired");
-
-        const selectProjectBtns = document.querySelectorAll(".selectProjectBtn");
-        selectProjectBtns.forEach((e) => {
-
-            e.addEventListener("click",function() {
-                console.log(e.name);
-                selectProject(e.name);
-            });
-        });
-    };
-
-
-    const addProjectBtn = document.querySelector(".addProjectBtn");
-    addProjectBtn.addEventListener("click", function() {console.log("project click")});
     
-    return {addSelectListeners, getCurrentProject};
+    
+    return {getCurrentProject};
 })();
 const testTask = Task('test_task');
 const testProject = Project('test_project');
