@@ -1,71 +1,67 @@
-import { Project, projectHandler } from './project';
-import { eventHandler } from './event';
+import { Project, projectHandler } from "./project";
+import { eventHandler } from "./event";
 
 const displayController = (() => {
+  const updateProjects = () => {
+    const projects = projectHandler.getProjects();
+    const projectContainer = document.querySelector(".projectContainer");
+    projectContainer.innerHTML = "";
 
-    const updateProjects = () => {
+    //this can be extracted
+    projects.forEach((e) => createButton(e));
 
-        const projects = projectHandler.getProjects();
-        const projectContainer = document.querySelector('.projectContainer');
-        projectContainer.innerHTML = "";
+    addSelectListeners();
+  };
 
-        projects.forEach((e) => {
-            let btn = document.createElement('button');
-            btn.innerHTML = e.getName();
+  const createButton = (project) => {
+    let btn = document.createElement("button");
+    let projectName = project.getName();
 
-            btn.classList.add('selectProjectBtn');
-            btn.setAttribute("name", e.getName());
-            projectContainer.appendChild(btn);
-            
-        });
+    btn.innerHTML = projectName;
+    btn.classList.add("name", projectName);
 
-        addSelectListeners();
-    };
+    projectContainer.appendChild(btn);
+  };
 
-    const updateTasks = (project) => {
+  const updateTasks = (project) => {
+    const tasks = project.getTasks();
+    const taskContainer = document.querySelector(".taskContainer");
+    taskContainer.innerHTML = "";
 
-        const tasks = project.getTasks();
-        const taskContainer = document.querySelector('.taskContainer');
-        taskContainer.innerHTML = "";
+    if (tasks) {
+      //this can be extracted
+      tasks.forEach((e) => {
+        let card = document.createElement("div");
+        card.classList.add("taskCard");
 
-        if(tasks) {
-            tasks.forEach((e) => {
-                let card = document.createElement('div');
-                card.classList.add('taskCard');
-    
-                let cardName = document.createElement('div');
-                cardName.innerHTML = e.getName();
-                cardName.classList.add('title');
-                
-                card.appendChild(cardName);
-                taskContainer.appendChild(card);
-            });
-        }
-    };
+        let cardName = document.createElement("div");
+        cardName.innerHTML = e.getName();
+        cardName.classList.add("title");
 
-    const clearInputs = () => {
-        const inputs = document.querySelectorAll("input");
-        inputs.forEach((e) => {
-            e.value = "";
-        });
-    };
+        card.appendChild(cardName);
+        taskContainer.appendChild(card);
+      });
+    }
+  };
 
-    const addSelectListeners = () => {
+  const clearInputs = () => {
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach((e) => {
+      e.value = "";
+    });
+  };
 
-        const selectProjectBtns = document.querySelectorAll(".selectProjectBtn");
-        selectProjectBtns.forEach((e) => {
+  const addSelectListeners = () => {
+    const selectProjectBtns = document.querySelectorAll(".selectProjectBtn");
+    selectProjectBtns.forEach((e) => {
+      e.addEventListener("click", function () {
+        console.log(e.name);
+        eventHandler.selectProject(e.name);
+      });
+    });
+  };
 
-            e.addEventListener("click",function() {
-                console.log(e.name);
-                eventHandler.selectProject(e.name);
-            });
-        });
-        
-    };
-
-    
-
-    return {updateProjects, updateTasks, clearInputs};
+  return { updateProjects, updateTasks, clearInputs };
 })();
 
-export {displayController}
+export { displayController };
