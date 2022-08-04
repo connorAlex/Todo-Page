@@ -44,9 +44,19 @@ const projectHandler = (() => {
 
     const getProjects = () => {
         return projectList;
-    }; 
+    };
 
-    return {addProject, removeProject, getProjects};
+    const findProject = (name) => {
+        if (projectList.includes(name)) {
+            return projectList.indexOf(name);
+        } else {
+            return false;
+        }
+        
+        
+    }
+
+    return {addProject, removeProject, getProjects, findProject};
 })();
 
 export {Project, projectHandler};
