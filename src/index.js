@@ -3,20 +3,18 @@ import { Project, projectHandler } from './js/project';
 import { Task } from './js/task';
 
 
-
-
-
-// displayController
 const displayController = (() => {
+
+    const addProjectBtn = document.querySelector(".addProjectBtn");
+    addProjectBtn.addEventListener("click", function() {console.log("project click")});
 
     const updateProjects = () => {
 
-        // loop through all projects in the project handler array and display on DOM
         const projects = projectHandler.getProjects();
         const projectContainer = document.querySelector('.projectContainer');
-
-        //reset Project buttons
         projectContainer.innerHTML = "";
+
+        
 
         projects.forEach((e) => {
             let btn = document.createElement('button');
@@ -31,20 +29,13 @@ const displayController = (() => {
     };
 
     const updateTasks = (project) => {
-        // loop through the selected project and display all tasks
-        console.log("update tasks fired");
 
         const tasks = project.getTasks();
         const taskContainer = document.querySelector('.taskContainer');
-        console.log(tasks);
-        //reset Tasks
         taskContainer.innerHTML = "";
 
-        // add task cards in
         if(tasks) {
             tasks.forEach((e) => {
-
-
                 let card = document.createElement('div');
                 card.classList.add('taskCard');
     
@@ -56,7 +47,6 @@ const displayController = (() => {
                 taskContainer.appendChild(card);
             });
         }
-        
     };
 
     const clearInputs = () => {
@@ -78,17 +68,15 @@ const displayController = (() => {
                 eventHandler.selectProject(e.name);
             });
         });
+        
     };
 
-
-    const addProjectBtn = document.querySelector(".addProjectBtn");
-    addProjectBtn.addEventListener("click", function() {console.log("project click")});
+    
 
     return {updateProjects, updateTasks, clearInputs};
 })();
 
 
-// Event Handler
 const eventHandler = ((event) => {
 
     let currentProject = "";
