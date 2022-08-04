@@ -27,7 +27,7 @@ const displayController = (() => {
             projectContainer.appendChild(btn);
             
         });
-        eventHandler.addSelectListeners();
+        addSelectListeners();
     };
 
     const updateTasks = (project) => {
@@ -75,7 +75,7 @@ const displayController = (() => {
 
             e.addEventListener("click",function() {
                 console.log(e.name);
-                selectProject(e.name);
+                eventHandler.selectProject(e.name);
             });
         });
     };
@@ -102,10 +102,10 @@ const eventHandler = ((event) => {
         displayController.updateTasks(projectObject);
     };
     
-    
-    
-    return {getCurrentProject};
+    return {getCurrentProject, selectProject};
 })();
+
+
 const testTask = Task('test_task');
 const testProject = Project('test_project');
 
