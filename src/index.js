@@ -6,15 +6,23 @@ import { Task } from './js/task';
 const displayController = (() => {
 
     const addProjectBtn = document.querySelector(".addProjectBtn");
-    addProjectBtn.addEventListener("click", function() {console.log("project click")});
+    const projectInput = document.querySelector(".projectInput");
+    addProjectBtn.addEventListener("click", function() {
+        
+        let project = Project(projectInput.value);
+        projectHandler.addProject(project);
+
+        updateProjects();
+        clearInputs();
+    });
+
+
 
     const updateProjects = () => {
 
         const projects = projectHandler.getProjects();
         const projectContainer = document.querySelector('.projectContainer');
         projectContainer.innerHTML = "";
-
-        
 
         projects.forEach((e) => {
             let btn = document.createElement('button');
@@ -25,6 +33,7 @@ const displayController = (() => {
             projectContainer.appendChild(btn);
             
         });
+
         addSelectListeners();
     };
 
@@ -52,13 +61,11 @@ const displayController = (() => {
     const clearInputs = () => {
         const inputs = document.querySelectorAll("input");
         inputs.forEach((e) => {
-            inputs.innerHTML = "";
+            e.value = "";
         });
     };
 
     const addSelectListeners = () => {
-
-        console.log("addSelectListeners fired");
 
         const selectProjectBtns = document.querySelectorAll(".selectProjectBtn");
         selectProjectBtns.forEach((e) => {
@@ -70,7 +77,6 @@ const displayController = (() => {
         });
         
     };
-
     
 
     return {updateProjects, updateTasks, clearInputs};
