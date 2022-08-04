@@ -13,21 +13,25 @@
   <main>
     <section class="projects">
         <div> Projects</div>
-        <button>+ Add Project</button>
+        <input class="projectInput">
+        <button class = "addProjectBtn">+ Add Project</button>
         
         <div class = "projectContainer">
             <!-- projects go here -->
-            <button>Project 1</button>
-            <button>Project 2</button>
+            <button name = "myProject" class = "selectProjectBtn">myProject</button>
+            
         </div>
         
     </section>
     <section class="content">
-        <div class="taskCard">
-            <div> Todo Item 1</div>
-        </div>
-        <div class="taskCard">
-            <div> Todo Item 2</div>
+        <button class = "taskBtn">Add Task</button>
+        <div class = "taskContainer">
+            <div class="taskCard">
+                <div> Todo Item 1</div>
+            </div>
+            <div class="taskCard">
+                <div> Todo Item 2</div>
+            </div>
         </div>
     </section>
   </main>
