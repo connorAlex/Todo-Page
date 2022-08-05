@@ -5,8 +5,6 @@ const eventHandler = (() => {
 
     let currentProject = "";
 
-    
-
     const getCurrentProject = () => currentProject;
 
     const selectProject = (project) => {
@@ -18,7 +16,9 @@ const eventHandler = (() => {
     
     const insertProject = (element) => {
         console.log(element);
+        if (element.value === '') {return false};
         let newProject = Project(element.value);
+        
         projectHandler.addProject(newProject);
         
         displayController.updateProjects();
@@ -28,7 +28,6 @@ const eventHandler = (() => {
     };
 
     
-
     return {getCurrentProject, selectProject, insertProject};
 })();
 

@@ -2,10 +2,11 @@ import { Project, projectHandler } from "./project";
 import { eventHandler } from "./event";
 
 const displayController = (() => {
+
+  const projectContainer = document.querySelector(".projectContainer");
+
   const updateProjects = () => {
     const projects = projectHandler.getProjects();
-
-    const projectContainer = document.querySelector(".projectContainer");
     projectContainer.innerHTML = "";
 
     projects.forEach((e) => createButton(e));
@@ -14,6 +15,7 @@ const displayController = (() => {
   };
 
   const createButton = (project) => {
+
     let btn = document.createElement("button");
     let projectName = project.getName();
 
@@ -62,5 +64,28 @@ const displayController = (() => {
 
   return { updateProjects, updateTasks, clearInputs };
 })();
+
+const overlayController = (() => {
+
+  let overlay = document.querySelector(".taskInput");
+  let addBtn = document.querySelector(".taskBtn");
+  //let submitBtn = document.querySelector();
+  
+
+  const toggleContainer = (element) => {
+
+    if (element.style.display === "flex") {
+      element.style.display = "none";
+    } else {
+      element.style.display = "flex";
+    }
+  };
+
+  addBtn.addEventListener("click", () => toggleContainer(overlay))
+
+})();
+
+
+
 
 export { displayController };
