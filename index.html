@@ -17,9 +17,7 @@
         <button class = "addProjectBtn">+ Add Project</button>
         
         <div class = "projectContainer">
-            <!-- projects go here -->
-            <button name = "myProject" class = "selectProjectBtn">myProject</button>
-            
+            <!-- projects go here -->            
         </div>
         
     </section>
@@ -34,18 +32,18 @@
             </div>
         </div>
     </section>
-    <section class = "taskInput">
-        <form>
+    <section class = "taskInputOverlay">
+        <div>
             <span>Task Submission</span>
-            <input placeholder="Task Name">
-            <input placeholder="Task Description">
-            <input type = "date">
+            <input class = "taskInput" placeholder="Task Name">
+            <input class = "taskInput" placeholder="Task Description">
+            <input class = "taskInput" type = "date">
             <div>
                 <label for ="priority">High Priority</label>
-                <input name = "priority" type="checkbox">
+                <input class = "taskInput" name = "priority" type="checkbox">
             </div>
-            <button>Submit</button>
-        </form>
+            <button class = "submit">Submit</button>
+        </div>
     </section>
   </main>
   <footer></footer>
