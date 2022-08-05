@@ -29,7 +29,6 @@ const projectHandler = (() => {
     let defaultProject = Project("myProject");
     projectList.push(defaultProject);
 
-
     const addProject = (project) => {
         projectList.push(project);
     };
@@ -44,7 +43,6 @@ const projectHandler = (() => {
     };
 
     const findProject = (projectName) => {
-
         let obj = projectList.find(e => e.getName() === projectName);
         return obj;
     }

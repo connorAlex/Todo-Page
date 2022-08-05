@@ -4,6 +4,7 @@ import { eventHandler } from "./event";
 const displayController = (() => {
 
   const projectContainer = document.querySelector(".projectContainer");
+  const taskContainer = document.querySelector(".taskContainer");
 
   const updateProjects = () => {
     const projects = projectHandler.getProjects();
@@ -20,22 +21,24 @@ const displayController = (() => {
     let projectName = project.getName();
 
     btn.innerHTML = projectName;
-    btn.classList.add("name", projectName);
+    btn.setAttribute("name", projectName);
+    btn.classList.add('selectProjectBtn');
 
     projectContainer.appendChild(btn);
   };
 
   const updateTasks = (project) => {
     const tasks = project.getTasks();
-    const taskContainer = document.querySelector(".taskContainer");
+    console.log(tasks);
+    
     taskContainer.innerHTML = "";
 
     if (tasks) tasks.forEach((e) => createCard(e));
   };
 
   const createCard = (task) => {
-    let card,
-      cardName = document.createElement("div");
+    let card = document.createElement("div");
+    let cardName = document.createElement("div");
     card.classList.add("taskCard");
 
     cardName.classList.add("title");
@@ -60,6 +63,7 @@ const displayController = (() => {
         eventHandler.selectProject(e.name);
       });
     });
+    console.log("addSelect fired");
   };
 
   return { updateProjects, updateTasks, clearInputs };
@@ -67,10 +71,7 @@ const displayController = (() => {
 
 const overlayController = (() => {
 
-  let overlay = document.querySelector(".taskInput");
-  let addBtn = document.querySelector(".taskBtn");
-  //let submitBtn = document.querySelector();
-  
+  const overlay = document.querySelector(".taskInputOverlay");
 
   const toggleContainer = (element) => {
 
@@ -81,11 +82,54 @@ const overlayController = (() => {
     }
   };
 
-  addBtn.addEventListener("click", () => toggleContainer(overlay))
+  //submit Task to the selected project
+  const submitTask = () => {
+    console.log("submitTask fired");
 
+    let rawInputs = document.querySelectorAll(".taskInput");
+    //if (!formVerification(rawInputs)) return false;
+
+    let inputs =  {
+      title: rawInputs[0].value,
+      description: rawInputs[1].value,
+      dueDate: rawInputs[2].value,
+      priority: rawInputs[3].checked ? "High": "Low"
+    };
+    console.log(inputs);
+
+    //get the selected project
+    console.log(eventHandler.getCurrentProject());
+
+
+    displayController.clearInputs();
+    toggleContainer(overlay);
+  };
+
+  const formVerification = (inputArr) => {
+    let output = true;
+    for (let i = 0; i < inputArr.length; i++){
+      if (inputArr[i].value === ""){
+        output = false;
+      }
+    };
+    return output;
+  };
+
+  const createOverlay  = () => {
+    
+    let addBtn = document.querySelector(".taskBtn");
+    let submitBtn = document.querySelector(".submit");
+
+    addBtn.addEventListener("click", () => toggleContainer(overlay));
+    submitBtn.addEventListener("click", () => submitTask());
+  };
+  
+  
+
+  return {createOverlay, submitTask};
 })();
 
 
 
 
-export { displayController };
+export { displayController, overlayController };

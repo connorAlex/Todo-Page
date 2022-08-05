@@ -1,5 +1,5 @@
 import "./style.css";
-import { displayController } from "./js/display";
+import { displayController, overlayController } from "./js/display";
 import { Project, projectHandler } from "./js/project";
 import { Task } from "./js/task";
 import { eventHandler } from "./js/event";
@@ -16,6 +16,9 @@ const pageLoad = (() => {
 
   testProject.addTask(testTask);
   projectHandler.addProject(testProject);
+  
+  //eventHandler.selectProject("testProject");
 
+  overlayController.createOverlay();
   displayController.updateProjects();
 })();

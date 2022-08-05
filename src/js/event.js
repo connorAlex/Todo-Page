@@ -8,14 +8,13 @@ const eventHandler = (() => {
     const getCurrentProject = () => currentProject;
 
     const selectProject = (project) => {
-        console.log("selectProject fired");
         currentProject = project;
         const projectObject = projectHandler.findProject(project);
         displayController.updateTasks(projectObject);
+        console.log("selectProject Fired");
     };
     
     const insertProject = (element) => {
-        console.log(element);
         if (element.value === '') {return false};
         let newProject = Project(element.value);
         
