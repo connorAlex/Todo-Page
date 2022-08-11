@@ -57,14 +57,40 @@ const elementCreator = (() => {
   const createCard = (task) => {
     let card = document.createElement("div");
     let cardName = document.createElement("div");
+    let content = document.createElement("div");
 
     card.classList.add("taskCard");
     cardName.classList.add("title");
+    content.classList.add("content");
     cardName.innerHTML = task.getName();
+    content.innerHTML = "content";
 
     card.appendChild(cardName);
+    
     taskContainer.appendChild(card);
+    taskContainer.appendChild(content);
+    animateTask(card);
   };
+
+  //allocate all of the task items into a series of divs
+  // const createContent = (task) => {
+
+  // };
+
+  const animateTask = (element) => {
+    console.log(element);
+
+    element.addEventListener("click", (e) => {
+      console.log(this);
+      element.classList.toggle("active");
+      let content = element.nextElementSibling;
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  }
   return { createButton, createCard };
 })();
 
