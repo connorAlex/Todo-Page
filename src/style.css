@@ -43,10 +43,25 @@ main{
     gap: 10px;
 
 }
+.taskContainer {
+    cursor: pointer;
+}
+.active, .taskContainer:hover {
+    background-color: aliceblue;
+}
 .taskCard {
     display:flex;
     padding: 15px;
+    
 }
+.content{
+    display:flex;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+}
+
+
 .taskInputOverlay {
     position: fixed;
     display: none;
