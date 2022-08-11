@@ -1,5 +1,7 @@
 import { Project, projectHandler } from "./project";
 import { eventHandler } from "./event";
+import { Task } from "./task";
+
 
 const displayController = (() => {
 
@@ -10,42 +12,19 @@ const displayController = (() => {
     const projects = projectHandler.getProjects();
     projectContainer.innerHTML = "";
 
-    projects.forEach((e) => createButton(e));
+    projects.forEach((e) => elementCreator.createButton(e));
 
     addSelectListeners();
   };
 
-  const createButton = (project) => {
-
-    let btn = document.createElement("button");
-    let projectName = project.getName();
-
-    btn.innerHTML = projectName;
-    btn.setAttribute("name", projectName);
-    btn.classList.add('selectProjectBtn');
-
-    projectContainer.appendChild(btn);
-  };
-
   const updateTasks = (project) => {
+    
     const tasks = project.getTasks();
     console.log(tasks);
     
     taskContainer.innerHTML = "";
 
-    if (tasks) tasks.forEach((e) => createCard(e));
-  };
-
-  const createCard = (task) => {
-    let card = document.createElement("div");
-    let cardName = document.createElement("div");
-    card.classList.add("taskCard");
-
-    cardName.classList.add("title");
-    cardName.innerHTML = task.getName();
-    card.appendChild(cardName);
-
-    taskContainer.appendChild(card);
+    if (tasks) tasks.forEach((e) => elementCreator.createCard(e));
   };
 
   const clearInputs = () => {
@@ -69,6 +48,39 @@ const displayController = (() => {
   return { updateProjects, updateTasks, clearInputs };
 })();
 
+const elementCreator = (() => {
+  const projectContainer = document.querySelector(".projectContainer");
+
+  const taskContainer = document.querySelector(".taskContainer");
+  const createButton = (project) => {
+    
+
+    let btn = document.createElement("button");
+    let projectName = project.getName();
+
+    btn.innerHTML = projectName;
+    btn.setAttribute("name", projectName);
+    btn.classList.add('selectProjectBtn');
+
+    projectContainer.appendChild(btn);
+  };
+
+  const createCard = (task) => {
+    
+    let card = document.createElement("div");
+    let cardName = document.createElement("div");
+    card.classList.add("taskCard");
+
+    cardName.classList.add("title");
+    cardName.innerHTML = task.getName();
+    card.appendChild(cardName);
+
+    taskContainer.appendChild(card);
+  };
+  return {createButton, createCard};
+})();
+
+
 const overlayController = (() => {
 
   const overlay = document.querySelector(".taskInputOverlay");
@@ -82,6 +94,7 @@ const overlayController = (() => {
     }
   };
 
+  //UNDER CONSTRUCTION
   //submit Task to the selected project
   const submitTask = () => {
     console.log("submitTask fired");
@@ -95,13 +108,26 @@ const overlayController = (() => {
       dueDate: rawInputs[2].value,
       priority: rawInputs[3].checked ? "High": "Low"
     };
-    console.log(inputs);
+    console.log(inputs.title);
 
     //get the selected project
-    console.log(eventHandler.getCurrentProject());
-
+    let currentProjectName = eventHandler.getCurrentProject();
+    let currentProject = projectHandler.findProject(currentProjectName);
+    
+    let newTask = Task(inputs.title, inputs.description, inputs.priority, inputs.dueDate);
+    console.log(newTask.getName());
+    console.log(newTask.getDesc());
+    console.log(newTask.getPriority());
+    console.log(newTask.getDueDate());
+    
+    console.log(currentProject);
+    currentProject.addTask(newTask);
 
     displayController.clearInputs();
+    console.log(currentProject.getTasks());
+    //something wrong here...
+    displayController.updateTasks(currentProject);
+    
     toggleContainer(overlay);
   };
 
@@ -124,12 +150,9 @@ const overlayController = (() => {
     submitBtn.addEventListener("click", () => submitTask());
   };
   
-  
 
   return {createOverlay, submitTask};
 })();
-
-
 
 
 export { displayController, overlayController };

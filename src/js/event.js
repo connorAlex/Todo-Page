@@ -11,17 +11,15 @@ const eventHandler = (() => {
         currentProject = project;
         const projectObject = projectHandler.findProject(project);
         displayController.updateTasks(projectObject);
-        console.log("selectProject Fired");
     };
     
     const insertProject = (element) => {
         if (element.value === '') {return false};
+
         let newProject = Project(element.value);
-        
         projectHandler.addProject(newProject);
         
         displayController.updateProjects();
-        console.log("made it here");
         displayController.clearInputs();
         
     };

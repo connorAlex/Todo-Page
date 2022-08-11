@@ -7,18 +7,23 @@ import { eventHandler } from "./js/event";
 const pageLoad = (() => {
   const addProjectBtn = document.querySelector(".addProjectBtn");
   const projectInput = document.querySelector(".projectInput");
+
+
   addProjectBtn.addEventListener("click", (e) =>
     eventHandler.insertProject(projectInput)
   );
 
-  const testTask = Task("test_task");
-  const testProject = Project("test_project");
+  const loadDefault = () => {
+    const testTask = Task("test_task");
+    const testProject = Project("test_project");
 
-  testProject.addTask(testTask);
-  projectHandler.addProject(testProject);
+    testProject.addTask(testTask);
+    projectHandler.addProject(testProject);
+    
+    eventHandler.selectProject(testProject.getName());
+  };
   
-  //eventHandler.selectProject("testProject");
-
+  loadDefault();
   overlayController.createOverlay();
   displayController.updateProjects();
 })();
