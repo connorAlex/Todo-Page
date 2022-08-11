@@ -80,22 +80,22 @@ const overlayController = (() => {
   };
 
   const submitTask = () => {
+
     let rawInputs = document.querySelectorAll(".taskInput");
     let currentProjectName = eventHandler.getCurrentProject();
     let currentProject = projectHandler.findProject(currentProjectName);
-    let newTask = Task(
-      inputs.title,
-      inputs.description,
-      inputs.priority,
-      inputs.dueDate
-    );
     let inputs = {
       title: rawInputs[0].value,
       description: rawInputs[1].value,
       dueDate: rawInputs[2].value,
       priority: rawInputs[3].checked ? "High" : "Low",
     };
-
+    let newTask = Task(
+      inputs.title,
+      inputs.description,
+      inputs.priority,
+      inputs.dueDate
+    );
     if (!formVerification(rawInputs)) return false;
 
     currentProject.addTask(newTask);
@@ -107,7 +107,8 @@ const overlayController = (() => {
   const formVerification = (inputArr) => {
     let output = true;
     for (let i = 0; i < inputArr.length; i++) {
-      if (inputArr[i].value === "") {
+      if (inputArr[i].value === "" && inputArr[i].type != "checkbox") {
+        console.log(inputArr[i].type);
         output = false;
       }
     }

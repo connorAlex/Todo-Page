@@ -18,7 +18,8 @@ const eventHandler = (() => {
 
         let newProject = Project(element.value);
         projectHandler.addProject(newProject);
-        
+        selectProject(newProject.getName());
+
         displayController.updateProjects();
         displayController.clearInputs();
         
