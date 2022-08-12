@@ -77,6 +77,7 @@ const elementCreator = (() => {
     };
 
     deleteBtn.classList.add("deleteBtn");
+    deleteBtn.name = task.getName();
     check.type = "checkbox";
     check.name = task.getName();
     
@@ -92,9 +93,15 @@ const elementCreator = (() => {
     card.appendChild(content);
     taskContainer.appendChild(card);
     animateTask(card);
+
     check.addEventListener("click", function(e) {
       e.stopPropagation();
       strikeTask(check)
+    });
+
+    deleteBtn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      eventHandler.deleteTask(deleteBtn);
     });
 
   };

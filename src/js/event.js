@@ -6,6 +6,7 @@ const eventHandler = (() => {
 
     let currentProject = "";
 
+    //change this to (projectHandler.findProject(currentProject);)?
     const getCurrentProject = () => currentProject;
 
     const selectProject = (project) => {
@@ -26,13 +27,19 @@ const eventHandler = (() => {
         
     };
 
+    const deleteTask = (element) => {
+        let project = projectHandler.findProject(currentProject);
+        let task = project.findTask(element.name);
+        project.removeTask(element.name);
+        displayController.updateTasks(project);
+    };
+
     const completeTask = (element) => {
         let task = projectHandler.findProject(getCurrentProject()).findTask(element.name);
         task.toggleStatus();
-        console.log(task.getStatus());
     };
 
-    return {getCurrentProject, selectProject, insertProject, completeTask};
+    return {getCurrentProject, selectProject, insertProject, completeTask, deleteTask};
 })();
 
 export {eventHandler};

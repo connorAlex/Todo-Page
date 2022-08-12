@@ -14,13 +14,21 @@ const Project = (name) => {
         projectArray.push(task);
     };
 
+    const getTaskIndex = (nameString) => {
+        let obj = projectArray.find(e => e.getName() === nameString);
+        let index = projectArray.indexOf(obj);
+        return index;
+    }
+
     const findTask = (nameString) => {
         let obj = projectArray.find(e => e.getName() === nameString);
         return obj;
     };
 
     const removeTask = (task) => {
-        const index = projectArray.indexOf(task);
+        console.log("about to remove: "  + task);
+        let index = getTaskIndex(task);
+        console.log(index);
         projectArray.splice(index, 1);
     }
 
