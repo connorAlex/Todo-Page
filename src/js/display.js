@@ -56,34 +56,42 @@ const elementCreator = (() => {
 
   const createCard = (task) => {
     let card = document.createElement("div");
-    let cardName = document.createElement("div");
+    let title = document.createElement("div");
     let content = document.createElement("div");
 
     card.classList.add("taskCard");
-    cardName.classList.add("title");
+    title.classList.add("title");
     content.classList.add("content");
-    cardName.innerHTML = task.getName();
-    content.innerHTML = "content";
+    title.innerHTML = task.getName();
+    content.innerHTML = task.getDesc();
 
-    card.appendChild(cardName);
-    
+    card.appendChild(title);
+    card.appendChild(content);
     taskContainer.appendChild(card);
-    taskContainer.appendChild(content);
     animateTask(card);
   };
 
   //allocate all of the task items into a series of divs
-  // const createContent = (task) => {
+  const createContent = (task) => {
+    //parent div
+    let content = document.createElement("div");
+    content.classList.add("content");
 
-  // };
+    //description
+    let desc = document.createElement("div");
+    desc.innerHTML = task.getDesc();
+    content.appendChild(desc);
+
+    return content
+  };
 
   const animateTask = (element) => {
     console.log(element);
 
     element.addEventListener("click", (e) => {
-      console.log(this);
       element.classList.toggle("active");
-      let content = element.nextElementSibling;
+      let content = element.children[1];
+      console.log(content);
       if (content.style.maxHeight) {
         content.style.maxHeight = null;
       } else {
