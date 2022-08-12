@@ -12,14 +12,19 @@ const Project = (name) => {
 
     const addTask = (task) => {
         projectArray.push(task);
-    }
+    };
+
+    const findTask = (nameString) => {
+        let obj = projectArray.find(e => e.getName() === nameString);
+        return obj;
+    };
 
     const removeTask = (task) => {
         const index = projectArray.indexOf(task);
         projectArray.splice(index, 1);
     }
 
-    return {addTask, getTasks, removeTask, getName};
+    return {addTask, getTasks, removeTask, getName, findTask};
 }
 
 const projectHandler = (() => {

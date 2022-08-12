@@ -43,8 +43,13 @@ main{
     gap: 10px;
 
 }
-.taskContainer {
-    
+.subject { 
+    display: flex;
+    align-content: center;
+    gap: 15px;
+}
+.complete {
+    text-decoration:line-through;
 }
 .active, .taskCard:hover {
     background-color: aliceblue;

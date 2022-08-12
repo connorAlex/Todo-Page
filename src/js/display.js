@@ -54,21 +54,49 @@ const elementCreator = (() => {
     projectContainer.appendChild(btn);
   };
 
+  //create element
+  const crel = (type, classAdd) => {
+    let output = document.createElement(type);
+    output.classList.add(classAdd);
+
+    return output;
+  };
+
   const createCard = (task) => {
-    let card = document.createElement("div");
-    let title = document.createElement("div");
-    let content = document.createElement("div");
+    let card = crel("div","taskCard");
+    let subject = crel("div","subject");
+    let content = crel("div","content");
+    let check = document.createElement("input");
+    let title = document.createElement("p");
+    let deleteBtn = document.createElement("button");
 
-    card.classList.add("taskCard");
-    title.classList.add("title");
-    content.classList.add("content");
-    title.innerHTML = task.getName();
-    content.innerHTML = task.getDesc();
+    // adding the "completed" styling
+    if (task.getStatus() === true) {
+      title.classList.add("complete");
+      check.checked = true;
+    };
 
-    card.appendChild(title);
+    deleteBtn.classList.add("deleteBtn");
+    check.type = "checkbox";
+    check.name = task.getName();
+    
+    title.innerHTML += task.getName();
+    content.innerHTML += task.getDesc();
+    
+
+    subject.appendChild(check);
+    subject.appendChild(title);
+    subject.appendChild(deleteBtn);
+
+    card.appendChild(subject);
     card.appendChild(content);
     taskContainer.appendChild(card);
     animateTask(card);
+    check.addEventListener("click", function(e) {
+      e.stopPropagation();
+      strikeTask(check)
+    });
+
   };
 
   //allocate all of the task items into a series of divs
@@ -86,12 +114,10 @@ const elementCreator = (() => {
   };
 
   const animateTask = (element) => {
-    console.log(element);
 
     element.addEventListener("click", (e) => {
       element.classList.toggle("active");
       let content = element.children[1];
-      console.log(content);
       if (content.style.maxHeight) {
         content.style.maxHeight = null;
       } else {
@@ -99,6 +125,13 @@ const elementCreator = (() => {
       }
     });
   }
+
+  const strikeTask = (checkbox) => {
+    eventHandler.completeTask(checkbox);
+    checkbox.parentElement.classList.toggle("complete");
+  };
+
+
   return { createButton, createCard };
 })();
 

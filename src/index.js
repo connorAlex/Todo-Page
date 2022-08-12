@@ -14,7 +14,7 @@ const pageLoad = (() => {
   );
 
   const loadDefault = () => {
-    const testTask = Task("Clean my room");
+    const testTask = Task("Clean my room", "Clean that shit up");
     const testProject = Project("myProject");
 
     testProject.addTask(testTask);

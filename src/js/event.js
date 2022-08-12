@@ -1,4 +1,5 @@
 import { Project, projectHandler } from './project';
+import { Task } from './task';
 import { displayController } from './display';
 
 const eventHandler = (() => {
@@ -25,8 +26,13 @@ const eventHandler = (() => {
         
     };
 
-    
-    return {getCurrentProject, selectProject, insertProject};
+    const completeTask = (element) => {
+        let task = projectHandler.findProject(getCurrentProject()).findTask(element.name);
+        task.toggleStatus();
+        console.log(task.getStatus());
+    };
+
+    return {getCurrentProject, selectProject, insertProject, completeTask};
 })();
 
 export {eventHandler};
