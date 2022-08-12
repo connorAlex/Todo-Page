@@ -13,7 +13,7 @@ const pageLoad = (() => {
     eventHandler.insertProject(projectInput)
   );
 
-  const loadDefault = () => {
+  const loadDefault = (() => {
     const testTask = Task("Clean my room", "Clean that shit up");
     const testProject = Project("myProject");
 
@@ -21,9 +21,8 @@ const pageLoad = (() => {
     projectHandler.addProject(testProject);
     
     eventHandler.selectProject(testProject.getName());
-  };
-  
-  loadDefault();
+  })();
+
   overlayController.createOverlay();
   displayController.updateProjects();
 })();
