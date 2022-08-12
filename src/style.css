@@ -71,7 +71,10 @@ main{
     transition: max-height 0.2s ease-out;
 }
 
-
+.deleteBtn {
+    margin-left:auto;
+    margin-right: 3vw;
+}
 .taskInputOverlay {
     position: fixed;
     display: none;
