@@ -9,9 +9,10 @@ const pageLoad = (() => {
   const projectInput = document.querySelector(".projectInput");
 
 
-  addProjectBtn.addEventListener("click", (e) =>
-    eventHandler.insertProject(projectInput)
-  );
+  addProjectBtn.addEventListener("click", (e) => {
+    eventHandler.insertProject(projectInput);
+    
+  });
 
   const loadDefault = (() => {
     const testTask = Task("Clean my room", "Clean that shit up");
@@ -24,5 +25,6 @@ const pageLoad = (() => {
   })();
 
   overlayController.createOverlay();
+  
   displayController.updateProjects();
 })();

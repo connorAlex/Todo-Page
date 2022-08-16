@@ -12,6 +12,7 @@ const displayController = (() => {
 
     projects.forEach((e) => elementCreator.createButton(e));
     addSelectListeners();
+    addSelectedBtnStyle();
   };
 
   const updateTasks = (project) => {
@@ -19,6 +20,7 @@ const displayController = (() => {
 
     taskContainer.innerHTML = "";
     if (tasks) tasks.forEach((e) => elementCreator.createCard(e));
+   
   };
 
   const clearInputs = () => {
@@ -33,11 +35,20 @@ const displayController = (() => {
     selectProjectBtns.forEach((e) => {
       e.addEventListener("click", function () {
         eventHandler.selectProject(e.name);
+        addSelectedBtnStyle();
       });
     });
   };
+  const addSelectedBtnStyle = () => {
+    let project = eventHandler.getCurrentProject();
+    let btn = document.querySelector(`button[name=${project}]`);
+    let oldSelected = document.querySelector(".selected");
+    if (oldSelected) oldSelected.classList.remove("selected");
 
-  return { updateProjects, updateTasks, clearInputs };
+    btn.classList.toggle("selected");
+  };
+
+  return { updateProjects, updateTasks, clearInputs, addSelectedBtnStyle };
 })();
 
 const elementCreator = (() => {
@@ -102,6 +113,7 @@ const elementCreator = (() => {
     deleteBtn.addEventListener("click", function(e) {
       e.stopPropagation();
       eventHandler.deleteTask(deleteBtn);
+      
     });
 
   };
@@ -131,7 +143,9 @@ const elementCreator = (() => {
         content.style.maxHeight = content.scrollHeight + "px";
       }
     });
-  }
+  };
+
+  
 
   const strikeTask = (checkbox) => {
     eventHandler.completeTask(checkbox);
