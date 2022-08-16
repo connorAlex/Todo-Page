@@ -16,7 +16,7 @@ const eventHandler = (() => {
     };
     
     const insertProject = (element) => {
-        if (element.value === '') {return false};
+        if (element.value === '' || !element.value.match(/^[0-9a-z]+$/)) {return false};
 
         let newProject = Project(element.value);
         projectHandler.addProject(newProject);
