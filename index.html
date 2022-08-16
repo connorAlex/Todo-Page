@@ -35,16 +35,22 @@
     </section>
     <section class = "taskInputOverlay">
         <div>
-            <span>Task Submission</span>
-            <input class = "taskInput" placeholder="Task Name">
-            <input class = "taskInput" placeholder="Task Description">
-            <input class = "taskInput" type = "date">
-            <div>
-                <label for ="priority">High Priority</label>
-                <input class = "taskInput" name = "priority" type="checkbox">
+            <div class = "taskInputLeft">
+                <span>Task Submission</span>
+                <input class = "taskInput" placeholder="Task Name">
+                
+                <input class = "taskInput" type = "date">
+                <div>
+                    <label for ="priority">High Priority</label>
+                    <input class = "taskInput" name = "priority" type="checkbox">
+                </div>
+                <button class = "submit">Submit</button>
             </div>
-            <button class = "submit">Submit</button>
+            <div class = "taskInputRight">
+                <textarea rows = 8 cols = 50 class = "taskInput" placeholder="Task Description"></textarea>
+            </div>
         </div>
+        
     </section>
   </main>
   <footer></footer>
