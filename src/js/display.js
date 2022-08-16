@@ -147,9 +147,9 @@ const overlayController = (() => {
 
   const toggleContainer = (element) => {
     if (element.style.display === "flex") {
-      element.style.display = "none";
+      element.classList.remove("toggle");
     } else {
-      element.style.display = "flex";
+      element.classList.add("toggle");
     }
   };
 
