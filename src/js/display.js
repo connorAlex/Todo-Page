@@ -118,20 +118,6 @@ const elementCreator = (() => {
 
   };
 
-  //allocate all of the task items into a series of divs
-  const createContent = (task) => {
-    //parent div
-    let content = document.createElement("div");
-    content.classList.add("content");
-
-    //description
-    let desc = document.createElement("div");
-    desc.innerHTML = task.getDesc();
-    content.appendChild(desc);
-
-    return content
-  };
-
   const animateTask = (element) => {
 
     element.addEventListener("click", (e) => {
@@ -172,11 +158,12 @@ const overlayController = (() => {
     let rawInputs = document.querySelectorAll(".taskInput");
     let currentProjectName = eventHandler.getCurrentProject();
     let currentProject = projectHandler.findProject(currentProjectName);
+    let desc = document.querySelector("textarea");
     let inputs = {
       title: rawInputs[0].value,
-      description: rawInputs[1].value,
-      dueDate: rawInputs[2].value,
-      priority: rawInputs[3].checked ? "High" : "Low",
+      description: desc.value,
+      dueDate: rawInputs[1].value,
+      priority: rawInputs[2].checked ? "High" : "Low",
     };
     let newTask = Task(
       inputs.title,
