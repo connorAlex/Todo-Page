@@ -86,7 +86,8 @@ main{
 
 .deleteBtn {
     margin-left:auto;
-    margin-right: 3vw;
+    height: auto;
+    padding: 0px 25px 0px 25px;
 }
 
 button{
@@ -146,8 +147,9 @@ button{
 .taskInputOverlay > div{
     position: absolute;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    gap: 25px;
 
     border: 1px solid;
     border-radius: 8px;

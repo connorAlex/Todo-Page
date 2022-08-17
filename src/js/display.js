@@ -89,6 +89,7 @@ const elementCreator = (() => {
 
     deleteBtn.classList.add("deleteBtn");
     deleteBtn.name = task.getName();
+    deleteBtn.innerHTML = "x";
     check.type = "checkbox";
     check.name = task.getName();
     
@@ -143,14 +144,10 @@ const elementCreator = (() => {
 })();
 
 const overlayController = (() => {
-  const overlay = document.querySelector(".taskInputOverlay");
+  const overlay = document.querySelector("#taskInputOverlay");
 
   const toggleContainer = (element) => {
-    if (element.style.display === "flex") {
-      element.classList.remove("toggle");
-    } else {
-      element.classList.add("toggle");
-    }
+    element.classList.toggle("toggle");
   };
 
   const submitTask = () => {
