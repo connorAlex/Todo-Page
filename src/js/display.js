@@ -10,7 +10,7 @@ const displayController = (() => {
     const projects = projectHandler.getProjects();
     projectContainer.innerHTML = "";
 
-    projects.forEach((e) => elementCreator.createButton(e));
+    projects.forEach((e) => elementCreator.createProjectButton(e));
     addSelectListeners();
     addSelectedBtnStyle();
   };
@@ -39,6 +39,7 @@ const displayController = (() => {
       });
     });
   };
+
   const addSelectedBtnStyle = () => {
     let project = eventHandler.getCurrentProject();
     let btn = document.querySelector(`button[name=${project}]`);
@@ -55,7 +56,7 @@ const elementCreator = (() => {
   const projectContainer = document.querySelector(".projectContainer");
   const taskContainer = document.querySelector(".taskContainer");
 
-  const createButton = (project) => {
+  const createProjectButton = (project) => {
     let btn = document.createElement("button");
     let projectName = project.getName();
 
@@ -73,49 +74,74 @@ const elementCreator = (() => {
     return output;
   };
 
-  const createCard = (task) => {
-    let card = crel("div","taskCard");
-    let subject = crel("div","subject");
-    let content = crel("div","content");
+  const createCheck = (task) => {
     let check = document.createElement("input");
-    let title = document.createElement("p");
-    let deleteBtn = document.createElement("button");
-
     // adding the "completed" styling
     if (task.getStatus() === true) {
       title.classList.add("complete");
       check.checked = true;
     };
-
-    deleteBtn.classList.add("deleteBtn");
-    deleteBtn.name = task.getName();
-    deleteBtn.innerHTML = "x";
     check.type = "checkbox";
     check.name = task.getName();
-    
-    title.innerHTML += task.getName();
-    content.innerHTML += task.getDesc();
-    
-
-    subject.appendChild(check);
-    subject.appendChild(title);
-    subject.appendChild(deleteBtn);
-
-    card.appendChild(subject);
-    card.appendChild(content);
-    taskContainer.appendChild(card);
-    animateTask(card);
 
     check.addEventListener("click", function(e) {
       e.stopPropagation();
       strikeTask(check)
     });
+    return check;
+  };
+
+  const createDeleteBtn = (name) => {
+    let deleteBtn = crel("button","deleteBtn");
+    deleteBtn.name = name;
+    deleteBtn.innerHTML = "x";
 
     deleteBtn.addEventListener("click", function(e) {
       e.stopPropagation();
       eventHandler.deleteTask(deleteBtn);
       
     });
+
+    return deleteBtn;
+  };
+  
+  const createTitle = (name) => {
+    let title = document.createElement("p");
+    title.innerHTML += name;
+
+    return title;
+  };
+
+  const createCardInfo = (task) => {
+    let content = crel("div","content");
+    let deleteBtn = createDeleteBtn(task.getName())
+    let check = createCheck(task);
+    
+    let subject = crel("div","subject");
+
+    let children = [
+      createCheck(task),
+      createTitle(task.getName()),
+      createDeleteBtn(task.getName())
+    ];
+
+    children.forEach((e) => subject.appendChild(e));
+
+    content.innerHTML += task.getDesc();
+
+    return {subject,content}
+  };
+   
+  const createCard = (task) => {
+    let card = crel("div","taskCard");
+    let info = createCardInfo(task);
+    
+    console.log(info.subject);
+
+    card.appendChild(info.subject);
+    card.appendChild(info.content);
+    taskContainer.appendChild(card);
+    animateTask(card);
 
   };
 
@@ -140,7 +166,7 @@ const elementCreator = (() => {
   };
 
 
-  return { createButton, createCard };
+  return { createProjectButton, createCard };
 })();
 
 const overlayController = (() => {
