@@ -8,13 +8,16 @@
 </head>
 <body>
     <header>
-        <div> Todoit  - Everyone's Favorite Task Manager </div>
+        <div> do it now. </div>
+        <div><a target = "_blank" href = "https://github.com/connorAlex">github</a></div>
     </header>
   <main>
     <section class="projects">
         <div> Projects</div>
-        <input class="projectInput">
-        <button class = "addProjectBtn">+ Add Project</button>
+        <div class = "projectInputDiv">
+            <input placeholder = "new project"class="projectInput">
+            <button class = "addProjectBtn">+</button>
+        </div>
         
         <div class = "projectContainer">
             <!-- projects go here -->            
@@ -22,27 +25,34 @@
         
     </section>
     <section class = "tasks">
+        <div>
+            <p>Tasks</p>
+            <button class = "taskBtn">Add Task</button>
+        </div>
         
-        <button class = "taskBtn">Add Task</button>
         <div class = "taskContainer">
             <!-- tasks go here -->
         </div>
     </section>
     <section id = "taskInputOverlay" class = "taskInputOverlay">
+
         <div>
-            <div class = "taskInputLeft">
-                <span>Task Submission</span>
-                <input class = "taskInput" placeholder="Task Name">
+            <button class = "overlayExit">X</button>
+            <div>
+                <div class = "taskInputLeft">
+                    <span>Task Submission</span>
+                    <input class = "taskInput" placeholder="Task Name">
                 
-                <input class = "taskInput" type = "date">
-                <div>
-                    <label for ="priority">High Priority</label>
-                    <input class = "taskInput" name = "priority" type="checkbox">
+                    <input class = "taskInput" type = "date">
+                    <div>
+                        <label for ="priority">High Priority</label>
+                        <input class = "taskInput" name = "priority" type="checkbox">
+                    </div>
+                    <button class = "submit">Submit</button>
                 </div>
-                <button class = "submit">Submit</button>
-            </div>
-            <div class = "taskInputRight">
-                <textarea rows = 8 cols = 50 class = "taskInput" placeholder="Task Description"></textarea>
+                <div class = "taskInputRight">
+                    <textarea rows = 4 cols = 40 class = "taskInput" placeholder="Task Description"></textarea>
+                </div>
             </div>
         </div>
         
