@@ -16,7 +16,7 @@ const pageLoad = (() => {
   });
 
   const loadDefault = (() => {
-    const testTask = Task("Clean my room", "Clean that shit up");
+    const testTask = Task("Clean my room", "Clean that shit up", "High", "2022-03-15");
     const testProject = Project("myProject");
 
     testProject.addTask(testTask);

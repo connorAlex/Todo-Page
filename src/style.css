@@ -134,9 +134,18 @@ input:focus, textarea:focus {
 .deleteBtn {
     margin-left:auto;
     height: auto;
-    padding: 0px 25px 0px 25px;
+    padding: 5px 10px 5px 10px;
+}
+.dueDate{
+    align-self: center;
 }
 
+.detail {
+    display:flex;
+    align-self:  center;
+    gap: 10px;
+    margin-left: auto;
+}
 button{
     background-color: inherit;
     border: 1px solid;

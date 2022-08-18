@@ -1,10 +1,11 @@
-import {parse, isPast} from 'date-fns';
+import {format, parse, isPast} from 'date-fns';
 
 const Task = (name, desc, priority, dueDate) => {
     
     let status = false;
     //convert html dueDate to a date object
-    const date = parse(dueDate, 'yyyy-mm-dd', new Date());
+    console.log(dueDate);
+    const date = format(parse(dueDate, 'yyyy-mm-dd', new Date()),"MM/dd/yyyy");
     
     const getName = () => name;
     const getDesc = () => desc;

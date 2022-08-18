@@ -59,15 +59,25 @@ const elementCreator = (() => {
   
       return title;
     };
+
+    const createDueDate = (dueDate) => {
+      let date = crel("div", "dueDate");
+      date.innerHTML = dueDate;
+      return date;
+    }
   
     const createCardInfo = (task) => {
       let content = crel("div","content");
       let subject = crel("div","subject");
+      let detail = crel("div", "detail");
+      
+      detail.appendChild(createDueDate(task.getDueDate()));
+      detail.appendChild(createDeleteBtn(task.getName()));
 
       let children = [
         createCheck(task),
         createTitle(task.getName()),
-        createDeleteBtn(task.getName())
+        detail
       ];
   
       children.forEach((e) => subject.appendChild(e));

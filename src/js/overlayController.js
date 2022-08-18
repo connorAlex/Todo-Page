@@ -8,15 +8,14 @@ const overlayController = (() => {
   
     const getInputs = () => {
       let inputs = document.querySelectorAll(".taskInput");
+      
       if (!formVerification(inputs)) return false;
       let newTask = Task(
         inputs[0].value,
         inputs[3].value,
-        inputs[1].value,
-        inputs.dueDate,
-        inputs[2].checked ? "High" : "Low"
+        inputs[2].checked ? "High" : "Low",
+        inputs[1].value
       );
-  
       return newTask;
     };
   
