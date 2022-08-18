@@ -225,8 +225,8 @@ button:hover{
     left: 50%;
     transform: translate(-50%, -50%);
 
-    width: 55vw;
-    height: 20vh;
+    width: fit-content;
+    height: fit-content;
 
     background-color: rgba(255, 255, 255, .8);
     backdrop-filter: blur(15px);
@@ -234,6 +234,7 @@ button:hover{
 .taskInputOverlay > div > button {
     align-self: flex-end;
     padding: 8px;
+    margin: 10px;
 }
 
 .taskInputOverlay > div > div{
