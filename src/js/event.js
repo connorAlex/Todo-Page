@@ -16,7 +16,7 @@ const eventHandler = (() => {
     };
     
     const insertProject = (element) => {
-        if (element.value === '' || !element.value.match(/^[0-9a-z]+$/)) {return false};
+        if (element.value === '' || !element.value.match(/^[0-9A-Za-z]+$/)) {return false};
 
         let newProject = Project(element.value);
         projectHandler.addProject(newProject);
@@ -32,6 +32,7 @@ const eventHandler = (() => {
         let task = project.findTask(element.name);
         project.removeTask(element.name);
         displayController.updateTasks(project);
+        projectHandler.storeProjects(project);
     };
 
     const completeTask = (element) => {
