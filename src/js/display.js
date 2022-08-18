@@ -2,6 +2,7 @@ import { Project, projectHandler } from "./project";
 import { eventHandler } from "./event";
 import { Task } from "./task";
 import { elementCreator } from "./elementCreator";
+import { overlayController } from "./overlayController";
 
 const displayController = (() => {
   const projectContainer = document.querySelector(".projectContainer");
@@ -52,60 +53,6 @@ const displayController = (() => {
   return { updateProjects, updateTasks, clearInputs, addSelectedBtnStyle };
 })();
 
-const overlayController = (() => {
-  const overlay = document.querySelector("#taskInputOverlay");
 
-  const toggleContainer = (element) => {
-    element.classList.toggle("toggle");
-  };
 
-  const getInputs = () => {
-    let inputs = document.querySelectorAll(".taskInput");
-    if (!formVerification(inputs) || desc === "") return false;
-    let newTask = Task(
-      inputs[0].value,
-      inputs[3].value,
-      inputs[1].value,
-      inputs.dueDate,
-      inputs[2].checked ? "High" : "Low"
-    );
-
-    return newTask;
-  };
-
-  const submitTask = () => {
-    let currentProjectName = eventHandler.getCurrentProject();
-    let currentProject = projectHandler.findProject(currentProjectName);
-    let newTask = getInputs();
-
-    currentProject.addTask(newTask);
-    displayController.clearInputs();
-    displayController.updateTasks(currentProject);
-    toggleContainer(overlay);
-  };
-
-  const formVerification = (inputArr) => {
-    console.log(inputArr);
-    let output = true;
-    for (let i = 0; i < inputArr.length; i++) {
-      if (inputArr[i].value === "" && inputArr[i].type != "checkbox") {
-        console.log(inputArr[i].type);
-        output = false;
-      }
-    }
-
-    return output;
-  };
-
-  const createOverlay = () => {
-    let addBtn = document.querySelector(".taskBtn");
-    let submitBtn = document.querySelector(".submit");
-
-    addBtn.addEventListener("click", () => toggleContainer(overlay));
-    submitBtn.addEventListener("click", () => submitTask());
-  };
-
-  return { createOverlay, submitTask };
-})();
-
-export { displayController, overlayController };
+export { displayController };

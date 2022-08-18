@@ -14,7 +14,7 @@ const elementCreator = (() => {
       projectContainer.appendChild(btn);
     };
   
-    //create element\
+    //create element
     const crel = (type, classAdd) => {
       let output = document.createElement(type);
       output.classList.add(classAdd);
@@ -63,7 +63,7 @@ const elementCreator = (() => {
     const createCardInfo = (task) => {
       let content = crel("div","content");
       let subject = crel("div","subject");
-  
+
       let children = [
         createCheck(task),
         createTitle(task.getName()),

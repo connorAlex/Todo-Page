@@ -1,8 +1,9 @@
 import "./style.css";
-import { displayController, overlayController } from "./js/display";
+import { displayController } from "./js/display";
 import { Project, projectHandler } from "./js/project";
 import { Task } from "./js/task";
 import { eventHandler } from "./js/event";
+import { overlayController } from "./js/overlayController";
 
 const pageLoad = (() => {
   const addProjectBtn = document.querySelector(".addProjectBtn");
