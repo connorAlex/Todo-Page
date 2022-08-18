@@ -26,10 +26,7 @@ const elementCreator = (() => {
     const createCheck = (task) => {
       let check = document.createElement("input");
       // adding the "completed" styling
-      if (task.getStatus() === true) {
-        title.classList.add("complete");
-        check.checked = true;
-      };
+      
       check.type = "checkbox";
       check.name = task.getName();
   
@@ -66,14 +63,20 @@ const elementCreator = (() => {
       let detail = crel("div", "detail");
       let title = crel("p","title", task.getName());
       let priority = crel("p","priority",(task.getPriority() ? "!":""));
-      
+      let check = createCheck(task);
+
       detail.appendChild(priority);
       detail.appendChild(createDueDate(task.getDueDate()));
       detail.appendChild(createDeleteBtn(task.getName()));
 
+      if (task.getStatus() === true) {
+        subject.classList.add("complete");
+        check.checked = true;
+      };
+
       let children = [
 
-        createCheck(task),
+        check,
         title,
         detail
       ];

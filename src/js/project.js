@@ -35,10 +35,12 @@ const Project = (name) => {
                 name: e.getName(),
                 desc: e.getDesc(),
                 priority: e.getPriority(),
-                dueDate: e.getDueDate()
+                dueDate: e.getDueDate(),
+                status: e.getStatus()
             };
             taskJson.push(taskObject);
         });
+        
         return taskJson;
     };
 
@@ -80,7 +82,6 @@ const projectHandler = (() => {
     const storeProjects = (project) => {
         let projectObject = saveProject(project);
         localStorage.setItem(projectObject.name, JSON.stringify(projectObject));
-        console.log("saved project");
     };
 
 
@@ -90,13 +91,11 @@ const projectHandler = (() => {
             let newProject = Project(projectObject.name);
 
             projectObject.tasks.forEach((e) => {
-                let newTask = Task(e.name,e.desc,e.priority, e.dueDate);
+                let newTask = Task(e.name,e.desc,e.priority, e.dueDate, e.status);
                 newProject.addTask(newTask);
             });
-            
-            addProject(newProject);
 
-            
+            addProject(newProject);
 
         }
     };

@@ -35,8 +35,10 @@ const eventHandler = (() => {
     };
 
     const completeTask = (element) => {
-        let task = projectHandler.findProject(getCurrentProject()).findTask(element.name);
+        let project = projectHandler.findProject(currentProject);
+        let task = project.findTask(element.name);
         task.toggleStatus();
+        projectHandler.storeProjects(project);
     };
 
     return {getCurrentProject, selectProject, insertProject, completeTask, deleteTask};

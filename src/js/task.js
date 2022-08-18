@@ -1,9 +1,10 @@
 import {format, parse, isPast} from 'date-fns';
 
 //use a default variable to set the status to false, then you can save the status
-const Task = (name, desc, priority, dueDate) => {
+const Task = (name, desc, priority, dueDate, newstatus = false) => {
     
-    let status = false;
+    let status = newstatus;
+    // let status = false;
     //convert html dueDate to a date object
     const date = format(parse(dueDate, 'yyyy-mm-dd', new Date()),"MM/dd/yyyy");
     
