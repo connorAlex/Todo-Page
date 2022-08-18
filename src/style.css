@@ -135,6 +135,9 @@ input:focus, textarea:focus {
     margin-left:auto;
     height: auto;
     padding: 5px 10px 5px 10px;
+    width: fit-content;
+    height: 30px;
+    align-self: center;
 }
 .dueDate{
     align-self: center;

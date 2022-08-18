@@ -15,9 +15,10 @@ const elementCreator = (() => {
     };
   
     //create element
-    const crel = (type, classAdd) => {
+    const crel = (type, classAdd, text = "") => {
       let output = document.createElement(type);
       output.classList.add(classAdd);
+      output.innerHTML = text;
   
       return output;
     };
@@ -52,13 +53,6 @@ const elementCreator = (() => {
   
       return deleteBtn;
     };
-    
-    const createTitle = (name) => {
-      let title = document.createElement("p");
-      title.innerHTML += name;
-  
-      return title;
-    };
 
     const createDueDate = (dueDate) => {
       let date = crel("div", "dueDate");
@@ -70,13 +64,17 @@ const elementCreator = (() => {
       let content = crel("div","content");
       let subject = crel("div","subject");
       let detail = crel("div", "detail");
+      let title = crel("p","title", task.getName());
+      let priority = crel("p","priority",(task.getPriority() ? "!":""));
       
+      detail.appendChild(priority);
       detail.appendChild(createDueDate(task.getDueDate()));
       detail.appendChild(createDeleteBtn(task.getName()));
 
       let children = [
+
         createCheck(task),
-        createTitle(task.getName()),
+        title,
         detail
       ];
   

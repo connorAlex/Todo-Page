@@ -12,7 +12,7 @@ const eventHandler = (() => {
     const selectProject = (project) => {
         currentProject = project;
         const projectObject = projectHandler.findProject(project);
-        displayController.updateTasks(projectObject);
+        if (projectObject) displayController.updateTasks(projectObject);
     };
     
     const insertProject = (element) => {

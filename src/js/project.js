@@ -1,4 +1,4 @@
-
+import { Task } from "./task";
 
 const Project = (name) => {
 
@@ -6,9 +6,7 @@ const Project = (name) => {
 
     const getName = () => name;
 
-    const getTasks = () => {
-        return projectArray;
-    }
+    const getTasks = () => projectArray;
 
     const addTask = (task) => {
         projectArray.push(task);
@@ -18,7 +16,7 @@ const Project = (name) => {
         let obj = projectArray.find(e => e.getName() === nameString);
         let index = projectArray.indexOf(obj);
         return index;
-    }
+    };
 
     const findTask = (nameString) => {
         let obj = projectArray.find(e => e.getName() === nameString);
@@ -26,13 +24,26 @@ const Project = (name) => {
     };
 
     const removeTask = (task) => {
-        console.log("about to remove: "  + task);
         let index = getTaskIndex(task);
-        console.log(index);
         projectArray.splice(index, 1);
-    }
+    };
 
-    return {addTask, getTasks, removeTask, getName, findTask};
+    const saveTasks = () => {
+        let taskJson = [];
+        projectArray.forEach((e) => {
+            let taskObject = {
+                name: e.getName(),
+                desc: e.getDesc(),
+                priority: e.getPriority(),
+                dueDate: e.getDueDate()
+            };
+            taskJson.push(taskObject);
+        });
+        return taskJson;
+    };
+
+
+    return {addTask, getTasks, removeTask, getName, findTask, saveTasks};
 }
 
 const projectHandler = (() => {
@@ -41,6 +52,7 @@ const projectHandler = (() => {
     
     const addProject = (project) => {
         projectList.push(project);
+        storeProjects(project);
     };
 
     const removeProject = (project) => {
@@ -53,11 +65,43 @@ const projectHandler = (() => {
     };
 
     const findProject = (projectName) => {
-        let obj = projectList.find(e => e.getName() === projectName);
+        let obj = projectList.find((e) => e.getName() === projectName);
         return obj;
-    }
+    };
+
+    const saveProject = (project) => {
+        let projectObject = {
+            name: project.getName(),
+            tasks: project.saveTasks()
+        };
+        return projectObject;
+    };
     
-    return {addProject, removeProject, getProjects, findProject};
+    const storeProjects = (project) => {
+        let projectObject = saveProject(project);
+        localStorage.setItem(projectObject.name, JSON.stringify(projectObject));
+        console.log("saved project");
+    };
+
+
+    const returnSavedProjects = () => {
+        for (let i = 0; i < localStorage.length; i++){
+            let projectObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+            let newProject = Project(projectObject.name);
+
+            projectObject.tasks.forEach((e) => {
+                let newTask = Task(e.name,e.desc,e.priority, e.dueDate);
+                newProject.addTask(newTask);
+            });
+            
+            addProject(newProject);
+
+            
+
+        }
+    };
+
+    return {addProject, removeProject, getProjects, findProject, storeProjects, returnSavedProjects};
 })();
 
 export {Project, projectHandler};
